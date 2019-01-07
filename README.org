@@ -13,6 +13,111 @@
 
 * Introduction
 
-  This is the Docker image that is used by Origoss Solutions.
+  This is the Docker image that is used by Origoss Solutions. Besides Ansible,
+  it contains the ~requests~ and ~google-auth~ modules.
 
+* Using the Docker Image
+** Basic Usage
 
+   #+CAPTION: Getting the Ansible version
+   #+NAME: cmd-ansible-version
+   #+BEGIN_SRC bash :results verbatim
+     docker run --rm origoss/ansible:latest --version
+   #+END_SRC
+
+   #+RESULTS: cmd-ansible-version
+   : ansible 2.7.5
+   :   config file = None
+   :   configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+   :   ansible python module location = /usr/local/lib/python3.7/site-packages/ansible
+   :   executable location = /usr/local/bin/ansible
+   :   python version = 3.7.2 (default, Dec 29 2018, 07:16:08) [GCC 6.3.0 20170516]
+
+* Building the Docker Image
+
+  #+CAPTION: Building the Docker Image
+  #+NAME: cmd-build-docker
+  #+BEGIN_SRC bash :results verbatim
+    docker build -t origoss/ansible:latest -t origoss/ansible:2.7.5 .
+  #+END_SRC
+
+  #+RESULTS: cmd-build-docker
+  #+begin_example
+  Sending build context to Docker daemon  58.88kB
+  Step 1/3 : FROM python:3.7.2
+   ---> db1c801f1c06
+  Step 2/3 : RUN pip install ansible requests google-auth
+   ---> Using cache
+   ---> 5e5c234bf885
+  Step 3/3 : ENTRYPOINT ["/usr/local/bin/ansible"]
+   ---> Using cache
+   ---> 844d0cca7380
+  Successfully built 844d0cca7380
+  Successfully tagged origoss/ansible:latest
+  Successfully tagged origoss/ansible:2.7.5
+  #+end_example
+
+* Pushing the Docker Image                                       ::noexport::
+
+  #+CAPTION: Pushing the Docker Image
+  #+NAME: cmd-push-docker
+  #+BEGIN_SRC bash :results verbatim
+    docker push origoss/ansible
+  #+END_SRC
+
+  #+RESULTS: cmd-push-docker
+  #+begin_example
+  The push refers to repository [docker.io/origoss/ansible]
+  43ea067296f6: Preparing
+  6c374831fe1c: Preparing
+  02aa9949b644: Preparing
+  690092220c96: Preparing
+  f9da64ec1b82: Preparing
+  743944ceb4ab: Preparing
+  d2217ead3a1c: Preparing
+  b53b57a50746: Preparing
+  d2518892581f: Preparing
+  c581f4ede92d: Preparing
+  743944ceb4ab: Waiting
+  d2217ead3a1c: Waiting
+  d2518892581f: Waiting
+  b53b57a50746: Waiting
+  c581f4ede92d: Waiting
+  690092220c96: Mounted from library/python
+  f9da64ec1b82: Mounted from library/python
+  02aa9949b644: Mounted from library/python
+  6c374831fe1c: Mounted from library/python
+  743944ceb4ab: Mounted from library/python
+  d2217ead3a1c: Mounted from library/python
+  b53b57a50746: Mounted from library/python
+  d2518892581f: Mounted from library/python
+  c581f4ede92d: Mounted from library/python
+  43ea067296f6: Pushed
+  2.7.5: digest: sha256:60c3fa1d1006aa57fd1209d425fb0ddd74a06a5cec6444fd6a27fa9b56525149 size: 2430
+  43ea067296f6: Preparing
+  6c374831fe1c: Preparing
+  02aa9949b644: Preparing
+  690092220c96: Preparing
+  f9da64ec1b82: Preparing
+  743944ceb4ab: Preparing
+  d2217ead3a1c: Preparing
+  b53b57a50746: Preparing
+  d2518892581f: Preparing
+  c581f4ede92d: Preparing
+  02aa9949b644: Layer already exists
+  d2217ead3a1c: Waiting
+  b53b57a50746: Waiting
+  43ea067296f6: Layer already exists
+  690092220c96: Layer already exists
+  743944ceb4ab: Waiting
+  6c374831fe1c: Layer already exists
+  c581f4ede92d: Waiting
+  d2518892581f: Waiting
+  f9da64ec1b82: Layer already exists
+  743944ceb4ab: Layer already exists
+  d2217ead3a1c: Layer already exists
+  b53b57a50746: Layer already exists
+  c581f4ede92d: Layer already exists
+  d2518892581f: Layer already exists
+  latest: digest: sha256:60c3fa1d1006aa57fd1209d425fb0ddd74a06a5cec6444fd6a27fa9b56525149 size: 2430
+  #+end_example
