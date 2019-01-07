@@ -1,0 +1,18 @@
+#+OPTIONS: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+OPTIONS: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+OPTIONS: email:nil f:t inline:t num:t p:nil pri:nil prop:nil stat:t tags:t
+#+OPTIONS: tasks:t tex:t timestamp:t title:t toc:t todo:t |:t
+#+TITLE: Ansible Docker Image
+#+DATE: <2019-01-07 h>
+#+AUTHOR: Gergely Szabo
+#+EMAIL: gergely.szabo@origoss.com
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+#+EXCLUDE_TAGS: noexport
+#+CREATOR: Emacs 25.2.2 (Org mode 9.2)
+
+* Introduction
+
+  This is the Docker image that is used by Origoss Solutions.
+
+
